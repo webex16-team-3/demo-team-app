@@ -12,7 +12,7 @@
       <div
         class="mini-palette"
         v-for="color in colors"
-        v-bind:key="color"
+        v-bind:key="color.id"
         v-bind:style="{
           backgroundColor: `rgba(${color.red}, ${color.green}, 200, 0.5)`,
         }"
@@ -23,11 +23,10 @@
 </template>
 
 <script>
-//key属性を持たせるためのid
-let id = 0
 export default {
   data() {
     return {
+      id: 0,
       red: 0,
       green: 0,
       colors: [],
@@ -42,11 +41,16 @@ export default {
     //色を選んでミニパレットに追加する
     pickColor() {
       const newColor = {
-        id: id++,
+        id: this.id++,
         red: this.red,
         green: this.green,
       }
       this.colors.push(newColor)
+    },
+    //パレットに指定した色を表示する
+    showColor(color) {
+      this.red = color.red
+      this.green = color.green
     },
   },
   computed: {
