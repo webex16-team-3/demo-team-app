@@ -2,7 +2,7 @@
   <h1>Vue メモ</h1>
   <div class="memo-list">
     <ul class="memo-list__container">
-      <li class="memo" v-for="item in memo" v-bind:key="item.id">
+      <li class="memo" v-for="(memo, index) in memos" v-bind:key="index">
         <div class="memo__checkbox">
           <input type="checkbox" v-model="memo.isDone" />
         </div>
@@ -10,7 +10,7 @@
           {{ index }}:{{ memo.text }}
         </div>
         <div v-else class="memo__text">{{ index }}:{{ memo.text }}</div>
-        <button v-on:click="deleteMemo(index)" class="memo__delete">
+        <button class="memo__delete" v-on:click="deleteMemo(index)">
           削除
         </button>
       </li>
