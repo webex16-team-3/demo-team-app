@@ -1,4 +1,16 @@
 <template>
   <h1>Home</h1>
-  <div>ここにそれぞれのアプリに行けるリンクを設置する</div>
+  <div>
+    <ul>
+      <li>
+        <a href="/quiz">Vueクイズ</a>
+      </li>
+      <li>
+        <a href="/palette">Vueパレット</a>
+      </li>
+      <li>
+        <a href="/memo">Vueメモ</a>
+      </li>
+    </ul>
+  </div>
 </template>
