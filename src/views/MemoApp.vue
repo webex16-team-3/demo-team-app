@@ -4,44 +4,55 @@
     <ul class="memo-list__container">
       <li class="memo" v-for="item in memo" v-bind:key="item.id">
         <div class="memo__checkbox">
-          <input type="checkbox" />
+          <input type="checkbox" v-model="memo.isDone" />
         </div>
-        <div class="memo__text">{{ item.text }}</div>
-        <button v-on:click="deleteMemo(item.id)" class="memo__delete">
+        <div v-if="memo.isDone" class="memo__text memo__text--done">
+          {{ index }}:{{ memo.text }}
+        </div>
+        <div v-else class="memo__text">{{ index }}:{{ memo.text }}</div>
+        <button v-on:click="deleteMemo(index)" class="memo__delete">
           削除
         </button>
       </li>
     </ul>
     <div class="add-memo-field">
-      <input v-model="memo_text" class="add-memo-field__input" type="text" />
-      <button v-ov:click="addMemo" class="add-memo-field__button">追加</button>
+      <input class="add-memo-field__input" type="text" v-model="inputMemo" />
+      <button class="add-memo-field__button" v-ov:click="addMemo">追加</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  data: function () {
+  data() {
     return {
-      memo: [],
-      memo_text: "",
-      count: 0,
+      inputMemo: "",
+      memos: [
+        {
+          text: "ひき肉を300g買う",
+          isDone: false,
+        },
+        {
+          text: "ホウレンソウを1束買う",
+          isDone: false,
+        },
+        {
+          text: "ピーマンを2個買う",
+          isDone: false,
+        },
+      ],
     }
   },
   methods: {
-    addMemo: function () {
-      this.count += 1
-      this.memo.push({ id: this.count, text: this.memo_text })
-      this.memo_text = ""
-    },
-  },
-  deleteMemo: function (index) {
-    for (let i = 0; i < this.memo.length; i++) {
-      if (this.memo[i].id === index) {
-        this.memo.splice(i, 1)
-        break
+    addMemo() {
+      if (this.inputMemo !== "") {
+        const memo = { text: this.inputMemo, isDone: false }
+        this.memos.push(memo)
       }
-    }
+    },
+    deleteMemo(index) {
+      this.memos.splice(index, 1)
+    },
   },
 }
 </script>
