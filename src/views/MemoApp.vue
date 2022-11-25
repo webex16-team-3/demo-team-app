@@ -2,7 +2,7 @@
   <h1>Vue メモ</h1>
   <div class="memo-list">
     <ul class="memo-list__container">
-      <li class="memo" v-for="(memo, index) in memos" v-bind:key="index">
+      <li v-for="(memo, index) in memos" v-bind:key="index" class="memo">
         <div class="memo__checkbox">
           <input type="checkbox" v-model="memo.isDone" />
         </div>
