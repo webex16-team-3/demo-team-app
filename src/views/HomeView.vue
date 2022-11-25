@@ -1,4 +1,4 @@
 <template>
   <h1>Home</h1>
-  <div></div>
+  <div>ここにそれぞれのアプリに行けるリンクを設置する</div>
 </template>
