@@ -17,7 +17,7 @@
     </ul>
     <div class="add-memo-field">
       <input class="add-memo-field__input" type="text" v-model="inputMemo" />
-      <button class="add-memo-field__button" v-ov:click="addMemo">追加</button>
+      <button class="add-memo-field__button" v-on:click="addMemo">追加</button>
     </div>
   </div>
 </template>
