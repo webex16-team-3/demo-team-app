@@ -2,37 +2,59 @@
   <h1>Vue メモ</h1>
   <div class="memo-list">
     <ul class="memo-list__container">
-      <li class="memo">
+      <li v-for="(memo, index) in memos" v-bind:key="index" class="memo">
         <div class="memo__checkbox">
-          <input type="checkbox" />
+          <input type="checkbox" v-model="memo.isDone" />
         </div>
-        <div class="memo__text">ひき肉を300g買う</div>
-        <button class="memo__delete">削除</button>
-      </li>
-      <li class="memo">
-        <div class="memo__checkbox">
-          <input type="checkbox" />
+        <div v-if="memo.isDone" class="memo__text memo__text--done">
+          {{ index }}:{{ memo.text }}
         </div>
-        <div class="memo__text">ホウレンソウを1束買う</div>
-        <button class="memo__delete">削除</button>
-      </li>
-      <li class="memo">
-        <div class="memo__checkbox">
-          <input type="checkbox" />
-        </div>
-        <div class="memo__text">ピーマンを2個買う</div>
-        <button class="memo__delete">削除</button>
+        <div v-else class="memo__text">{{ index }}:{{ memo.text }}</div>
+        <button class="memo__delete" v-on:click="deleteMemo(index)">
+          削除
+        </button>
       </li>
     </ul>
     <div class="add-memo-field">
-      <input class="add-memo-field__input" type="text" />
-      <button class="add-memo-field__button">追加</button>
+      <input class="add-memo-field__input" type="text" v-model="inputMemo" />
+      <button class="add-memo-field__button" v-on:click="addMemo">追加</button>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      inputMemo: "",
+      memos: [
+        {
+          text: "ひき肉を300g買う",
+          isDone: false,
+        },
+        {
+          text: "ホウレンソウを1束買う",
+          isDone: false,
+        },
+        {
+          text: "ピーマンを2個買う",
+          isDone: false,
+        },
+      ],
+    }
+  },
+  methods: {
+    addMemo() {
+      if (this.inputMemo !== "") {
+        const memo = { text: this.inputMemo, isDone: false }
+        this.memos.push(memo)
+      }
+    },
+    deleteMemo(index) {
+      this.memos.splice(index, 1)
+    },
+  },
+}
 </script>
 
 <style scoped>
